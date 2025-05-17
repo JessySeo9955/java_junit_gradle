@@ -32,6 +32,7 @@ public class HelloWorld {
 ```
 
 ## Single project
+```
 my-gradle-project/        <-- 🟢 Root project (also the only project)
 ├── build.gradle.kts      <-- Gradle build script (Kotlin DSL)
 ├── settings.gradle.kts   <-- Tells Gradle the project name
@@ -51,8 +52,9 @@ my-gradle-project/        <-- 🟢 Root project (also the only project)
 ├── .project              <-- Eclipse project metadata
 ├── .classpath            <-- Eclipse classpath metadata
 └── .settings/            <-- Eclipse settings folder
-
+```
 ## multiple projects  
+```
 my-multi-project/
 ├── build.gradle.kts        <-- Empty or common config
 ├── settings.gradle.kts     <-- Includes subprojects
@@ -63,7 +65,7 @@ my-multi-project/
 │   ├── build.gradle.kts
 │   └── src/main/java/...
 └── gradle/ and gradlew/... <-- Wrapper files
-
+```
 ```
 rootProject.name = "my-multi-project"
 include("lib", "app")
