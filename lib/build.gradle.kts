@@ -26,12 +26,31 @@ repositories {
 
 dependencies {
     // Used to write and run unit tests in src/test/java.
-	testImplementation(libs.junit.jupiter) 
-
+	//testImplementation(libs.junit.jupiter)
+	testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+	
+	testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0") // ✅ Needed for @ParameterizedTest
+    // Mockito core for mocking
+    testImplementation("org.mockito:mockito-core:5.17.0")
+    
+    // Mockito JUnit 5 extension to use Mockito with JUnit 5
+    testImplementation("org.mockito:mockito-junit-jupiter:5.17.0")
 
 	// Enables Gradle (and IDEs) to discover and run JUnit 5 tests properly.
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+	
+    // AssertJ for fluent assertions
+    testImplementation("org.assertj:assertj-core:3.25.1")
 
+
+	   // Cucumber JVM with JUnit 5 support
+    testImplementation("io.cucumber:cucumber-java:7.22.2")
+    testImplementation("io.cucumber:cucumber-junit:7.22.2")
+	testImplementation("io.cucumber:cucumber-junit-platform-engine:7.22.2")
+	testImplementation("org.junit.platform:junit-platform-suite:1.12.2")
+	
+	
 	// This dependency is part of your public API.
     // This dependency is exported to consumers, that is to say found on their compile classpath.
 	// Apache Commons Math: A math library offering functions for statistics, geometry, linear algebra, etc.
@@ -41,6 +60,8 @@ dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
 	// Google Guava: A utility library offering advanced collections, caching, functional programming, etc.
     implementation(libs.guava)
+	
+	
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
@@ -71,6 +92,13 @@ tasks.named<Test>("test") {
 	testLogging {
         events("passed", "skipped", "failed") // Specifies which test events to log
         showStandardStreams = true // Show standard output (System.out.println) and standard error (System.err) during test execution
-    }
+       
+	}
+	
+    jvmArgs = listOf(
+    	"-javaagent:${configurations.testRuntimeClasspath.get().find { it.name.contains("mockito-core") }}=inline"
+    )
+
+	systemProperty("cucumber.junit-platform.naming-strategy", "long")
 	
 }
