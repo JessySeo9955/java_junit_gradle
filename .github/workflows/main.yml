@@ -21,6 +21,10 @@ jobs:
         java-version: '21'
         distribution: 'corretto'
 
+   # Step 3: Make gradlew executable
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+
     # Step 3: Build the JAR file (using Gradle)
     - name: Build JAR file using Gradle
       run: ./gradlew build  # Adjust this if you're using Maven or have custom build steps
