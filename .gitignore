@@ -1,5 +1,40 @@
-# Ignore Gradle project-specific cache directory
-.gradle
+# Compiled class files
+*.class
 
-# Ignore Gradle build output directory
-build
+# Log files
+*.log
+
+# Gradle build output
+/build/
+.gradle/
+!gradle/wrapper/gradle-wrapper.jar
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# VS Code
+.vscode/
+
+# Eclipse
+*.classpath
+*.project
+*.settings/
+
+# Test reports
+/test-results/
+*/build/reports/
+
+# Cucumber-specific
+**/cucumber-html-reports/
+**/cucumber.json
+**/cucumber.xml
+
+# JUnit test result caches
+/test-results/
+**/surefire-reports/
+
+# IntelliJ test result cache
+/out/

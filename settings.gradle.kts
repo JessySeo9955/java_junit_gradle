@@ -11,4 +11,4 @@ plugins {
 }
 
 rootProject.name = "junit.gradle"
-include("lib")
+include("app")
