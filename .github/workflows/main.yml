@@ -37,10 +37,9 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run: |
-        ls -al
         aws lambda update-function-code \
           --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-          --zip-file fileb://build/libs/app.jar \
+          --zip-file fileb://app/build/libs/app.jar \
           --region ${{ secrets.AWS_REGION }}
 
     # Step 5: Redeploy API Gateway
