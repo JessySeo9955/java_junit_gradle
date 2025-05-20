@@ -49,7 +49,7 @@ jobs:
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
       run: |
-        aws apigateway create-deployment \
+        aws apigatewayv2 create-deployment \
           --api-id ${{ secrets.API_GATEWAY_ID }} \
           --stage-name ${{ secrets.API_STAGE_NAME }} \
           --region ${{ secrets.AWS_REGION }}
