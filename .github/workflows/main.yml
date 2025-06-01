@@ -33,17 +33,25 @@ jobs:
         SECRET_KEY: ${{ secrets.OPEN_WEATHER_SECRET_KEY }}
 
     # Step 4: Deploy JAR to AWS Lambda
-    - name: Deploy JAR to AWS Lambda
+    - name: Deploy JAR to AWS Lambda and set environment variable
       env:
         AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         AWS_REGION: ${{ secrets.AWS_REGION }}
+        LAMBDA_FUNCTION_NAME: ${{ secrets.LAMBDA_FUNCTION_NAME }}
+        SECRET_KEY: ${{ secrets.OPEN_WEATHER_SECRET_KEY }}
       run: |
+        echo "Updating Lambda function code..."
         aws lambda update-function-code \
-          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-          --environment "Variables={SECRET_KEY=${{ secrets.OPEN_WEATHER_SECRET_KEY }}}" \
+          --function-name "$LAMBDA_FUNCTION_NAME" \
           --zip-file fileb://app/build/libs/app.jar \
-          --region ${{ secrets.AWS_REGION }}
+          --region "$AWS_REGION"
+    
+        echo "Setting Lambda environment variable..."
+        aws lambda update-function-configuration \
+          --function-name "$LAMBDA_FUNCTION_NAME" \
+          --region "$AWS_REGION" \
+          --environment "Variables={SECRET_KEY=$SECRET_KEY}"
 
     # Step 5: Redeploy API Gateway
     - name: Redeploy API Gateway
