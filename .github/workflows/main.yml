@@ -45,14 +45,8 @@ jobs:
         aws lambda update-function-code \
           --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
           --zip-file fileb://app/build/libs/app.jar \
-          --region ${{ secrets.AWS_REGION }}
-    
-        echo "Setting Lambda environment variable..."
-        aws lambda update-function-configuration \
-          --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-          --environment "Variables={SECRET_KEY=$SECRET_KEY}"
-          --region ${{ secrets.AWS_REGION }} \
-      
+          --region ${{ secrets.AWS_REGION }} 
+
     # Step 5: Redeploy API Gateway
     - name: Redeploy API Gateway
       env:
