@@ -66,8 +66,10 @@ dependencies {
 	// This is used by your code, but not exposed to users of your library/module.
 	// This dependency is used internally, and not exposed to consumers on their own compile classpath.
 	// Google Guava: A utility library offering advanced collections, caching, functional programming, etc.
-	implementation(libs.guava)
 
+	implementation("com.fasterxml.jackson.core:jackson-databind:2.15.0")
+	
+	
 
 }
 
