@@ -50,7 +50,7 @@ jobs:
         echo "Setting Lambda environment variable..."
         aws lambda update-function-configuration \
           --function-name ${{ secrets.LAMBDA_FUNCTION_NAME }} \
-          --environment "Variables={SECRET_KEY=${{ secrets.OPEN_WEATHER_SECRET_KEY }}}" \
+          --environment "Variables={SECRET_KEY=$SECRET_KEY}"
           --region ${{ secrets.AWS_REGION }} \
       
     # Step 5: Redeploy API Gateway
